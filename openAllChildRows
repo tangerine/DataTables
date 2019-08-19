@@ -1,0 +1,19 @@
+/**
+ * Open all "child" rows
+ */
+$.fn.dataTable.ext.buttons.openAllChildRows = {
+    action: function () {
+        oTable.rows().eq(0).each( function ( idx ) {
+        var row = oTable.row( idx );
+        var id = row.data().DT_RowId.replace(/[^0-9]/g,"");
+
+        // args must be a JSON object comprising one or more key/value pairs.
+        var args = {id: id};
+
+        // controller must have been supplied as a global variable.
+         row.child(getChildRow(controller, args)).show();
+   
+         $(this).addClass("shown");
+        });
+    } // action: function()
+};
