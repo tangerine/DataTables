@@ -1,0 +1,9 @@
+/**
+ * Hide "selected" rows by applying the "noDisplay" class.
+ */
+$.fn.dataTable.ext.buttons.hideSelectedRows = {
+    extend: "selected",
+    action: function ( e, dt, node, config ) {
+        dt.rows({ selected: true }).nodes().to$().addClass("noDisplay");
+    } // action: function()
+};

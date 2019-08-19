@@ -1,0 +1,22 @@
+/**
+ * Open child rows for selected rows, unless the "noDisplay" class has been applied.
+ * The "noDisplay" class is applied by hideSelectedRows.
+ */
+$.fn.dataTable.ext.buttons.openChildRowsForSelectedRows = {
+    extend: "selected",
+    action: function ( e, dt, node, config ) {
+        dt.rows({ selected: true }).every( function () {
+            var tr = $(this.node());
+            var id = tr[0].firstChild.innerText;
+
+            // args must be a JSON object comprising one or more key/value pairs.
+            var args = {id: id};
+
+            // controller must have been supplied as a global variable.
+            if (!tr.hasClass("noDisplay")) {
+                this.child(getChildRow(controller, args)).show();
+                tr.addClass("shown");
+            }
+        });
+    } // action: function()
+};
